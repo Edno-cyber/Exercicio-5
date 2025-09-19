@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Tarefas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #container {
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.2);
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px 0;
+        }
+        #tarefaInput {
+            width: 70%;
+        }
+        .btn {
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        .btn-adicionar {
+            background: #28a745;
+            color: white;
+        }
+        .btn-remover {
+            background: #dc3545;
+            color: white;
+            margin-top: 10px;
+            width: 100%;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            padding: 8px;
+            margin: 5px 0;
+            background: #eee;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        li.concluida {
+            text-decoration: line-through;
+            background: #d4edda;
+        }
+        .checkbox {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>📌 Lista de Tarefas</h1>
+        <input type="text" id="tarefaInput" placeholder="Digite uma tarefa...">
+        <button class="btn btn-adicionar" onclick="gerenciarTarefas('adicionar')">Adicionar</button>
+        <ul id="listaTarefas"></ul>
+        <button class="btn btn-remover" onclick="gerenciarTarefas('remover')">Remover concluídas</button>
+    </div>
+
+    <script>
+        let tarefas = [
+            { descricao: "Estudar", concluida: false },
+            { descricao: "Fazer exercícios", concluida: false },
+            { descricao: "Trabalhar", concluida: true }
+        ];
+
+        function gerenciarTarefas(acao) {
+            if (acao === "adicionar") {
+                let input = document.getElementById("tarefaInput");
+                if (input.value.trim() !== "") {
+                    tarefas.push({ descricao: input.value, concluida: false });
+                    input.value = "";
+                } else {
+                    alert("Digite uma descrição para a tarefa!");
+                }
+            } else if (acao === "remover") {
+                tarefas = tarefas.filter(tarefa => !tarefa.concluida);
+            }
+            listarTarefas();
+        }
+
+        function listarTarefas() {
+            let lista = document.getElementById("listaTarefas");
+            lista.innerHTML = "";
+
+            tarefas.forEach((tarefa, index) => {
+                let li = document.createElement("li");
+                li.className = tarefa.concluida ? "concluida" : "";
+
+                let check = document.createElement("input");
+                check.type = "checkbox";
+                check.className = "checkbox";
+                check.checked = tarefa.concluida;
+                check.onchange = () => {
+                    tarefas[index].concluida = !tarefas[index].concluida;
+                    listarTarefas();
+                };
+
+                li.appendChild(check);
+                li.appendChild(document.createTextNode(tarefa.descricao));
+                lista.appendChild(li);
+            });
+        }
+
+        // Exibir tarefas ao carregar a página
+        listarTarefas();
+    </script>
+</body>
+</html>
