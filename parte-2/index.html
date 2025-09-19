@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Clínica Veterinária - Atendimento</title>
+  <script>
+    // SISTEMA DE ATENDIMENTO INTERATIVO - CLÍNICA VETERINÁRIA
+    window.onload = function() {
+
+      // 1. Boas-vindas ao tutor
+      let nomeTutor = prompt("Olá, seja bem-vindo à nossa clínica! Qual é o seu nome?");
+      alert("Seja bem-vindo(a), " + nomeTutor + "! É um prazer receber você e seu pet. 🐾");
+
+      // 2. Verificação de idade do tutor
+      let idadeTutor = parseInt(prompt("Qual é a sua idade?"));
+      if (idadeTutor >= 18) {
+        alert("Você é maior de idade e está autorizado a prosseguir com o atendimento. ✅");
+      } else {
+        alert("Você é menor de idade. Atenção: para autorizar atendimentos, é necessário um responsável maior de idade. ⚠️");
+      }
+
+      // 3. Número da sorte: par ou ímpar
+      let numeroSorte = parseInt(prompt("Digite seu número da sorte:"));
+      if (numeroSorte % 2 === 0) {
+        alert("O número " + numeroSorte + " é PAR! ✨");
+      } else {
+        alert("O número " + numeroSorte + " é ÍMPAR! 🍀");
+      }
+
+      // 4. Mini calculadora
+      let operacao = prompt("Deseja simular custos? Escolha a operação (+, -, *, /):");
+      let valor1 = parseFloat(prompt("Digite o primeiro valor:"));
+      let valor2 = parseFloat(prompt("Digite o segundo valor:"));
+      let resultado;
+      switch (operacao) {
+        case "+":
+          resultado = valor1 + valor2;
+          break;
+        case "-":
+          resultado = valor1 - valor2;
+          break;
+        case "*":
+          resultado = valor1 * valor2;
+          break;
+        case "/":
+          if (valor2 !== 0) {
+            resultado = valor1 / valor2;
+          } else {
+            resultado = "Erro: divisão por zero não é permitida!";
+          }
+          break;
+        default:
+          resultado = "Operação inválida!";
+      }
+      alert("Resultado da operação: " + resultado);
+
+      // 5. Estação do ano
+      let mesAno = prompt("Informe o mês do ano para saber a estação (ex: janeiro):").toLowerCase();
+      let estacao;
+      switch (mesAno) {
+        case "dezembro":
+        case "janeiro":
+        case "fevereiro":
+          estacao = "Verão";
+          break;
+        case "março":
+        case "abril":
+        case "maio":
+          estacao = "Outono";
+          break;
+        case "junho":
+        case "julho":
+        case "agosto":
+          estacao = "Inverno";
+          break;
+        case "setembro":
+        case "outubro":
+        case "novembro":
+          estacao = "Primavera";
+          break;
+        default:
+          estacao = "Mês inválido!";
+      }
+      alert("Estamos na estação: " + estacao + " 🌎");
+
+      // 6. Número positivo + próximos 5 pares
+      let numeroPositivo = parseInt(prompt("Digite um número positivo, por exemplo a idade do seu pet:"));
+      if (numeroPositivo > 0) {
+        let pares = [];
+        let contador = 0;
+        let num = numeroPositivo + 1;
+        while (contador < 5) {
+          if (num % 2 === 0) {
+            pares.push(num);
+            contador++;
+          }
+          num++;
+        }
+        alert("Os próximos 5 números pares após " + numeroPositivo + " são: " + pares.join(", "));
+      } else {
+        alert("Número inválido. É necessário um valor maior que zero. ❌");
+      }
+
+      // 7. Idade do cachorro em anos humanos
+      function idadeHumana(idadeCao) {
+        return idadeCao * 7;
+      }
+      let idadeCao = parseInt(prompt("Qual a idade do seu cachorro?"));
+      alert("A idade equivalente do seu cachorro em anos humanos é: " + idadeHumana(idadeCao) + " anos.");
+
+      // 8. Cálculo de áreas
+      function areaQuadrado(lado) {
+        return lado * lado;
+      }
+      function areaTriangulo(base, altura) {
+        return (base * altura) / 2;
+      }
+      function areaCirculo(raio) {
+        return Math.PI * raio * raio;
+      }
+
+      let forma = prompt("Gostaria de calcular a área de qual forma geométrica? (quadrado, triangulo, circulo)").toLowerCase();
+      let area;
+      if (forma === "quadrado") {
+        let lado = parseFloat(prompt("Digite o valor do lado do quadrado:"));
+        area = areaQuadrado(lado);
+      } else if (forma === "triangulo") {
+        let base = parseFloat(prompt("Digite a base do triângulo:"));
+        let altura = parseFloat(prompt("Digite a altura do triângulo:"));
+        area = areaTriangulo(base, altura);
+      } else if (forma === "circulo") {
+        let raio = parseFloat(prompt("Digite o raio do círculo:"));
+        area = areaCirculo(raio);
+      } else {
+        area = "Forma inválida!";
+      }
+      alert("A área calculada é: " + area);
+
+      // 9. Mensagem de encerramento
+      alert("Obrigado por utilizar o sistema da clínica veterinária, " + nomeTutor + ". Seu pet agradece! 💙🐶🐱");
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>
